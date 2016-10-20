@@ -32,6 +32,27 @@ categories = ['BOOKS_AND_REFERENCE', 'BUSINESS', 'COMICS', 'COMMUNICATION', 'EDU
               'CASUAL', 'GAME_WALLPAPER', 'RACING', 'SPORTS_GAMES', 'GAME_WIDGETS', 'GAME']
 app_types = ['free', 'paid']
 
+def getApps( url ):
+    previous_apps = []
+    previous_skipped_apps = []
+    start_idx = 0
+    size = 100
+    while(True):
+        apps, skipped_apps = getTopAppsData( url, start_idx, size, app_type )
+        if apps == previous_apps and skipped_apps == previous_skipped_apps: break
+        for app in apps:
+            if app['category'].upper() not in fileHandlers:
+                fileHandlers[app['category'].upper()] = codecs.open( '_'.join( ["apps", app['category'].lower()] ), 'ab', character_encoding, buffering = 0 )
+            fileHandler = fileHandlers[app['category'].upper()]
+            try:
+                fileHandler.write( json.dumps( app ) + "\n" )
+            except Exception as e:
+                print( e )
+        previous_apps = apps
+        previous_skipped_apps = skipped_apps
+        start_idx += size
+        saveState()
+
 '''
 fileHandlers = openResultFiles(categories)
 
