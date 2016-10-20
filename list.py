@@ -99,38 +99,49 @@ def getAppDetails(app_url):
     apps_discovered.append(app_url)
 
     print(g_app_url)
+
     title_div = soup.find('div', {'class': 'document-title'})
-    app_details['title'] = title_div.find('div').get_text().strip()
+    if title_div:
+        app_details['title'] = title_div.find('div').get_text().strip()
 
     subtitle = soup.find('a', {'class': 'document-subtitle primary'})
-    app_details['developer'] = subtitle.get_text().strip()
-    app_details['developer_link'] = subtitle.get('href').strip()
+    if subtitle:
+        app_details['developer'] = subtitle.get_text().strip()
+        app_details['developer_link'] = subtitle.get('href').strip()
 
     price_buy_span = soup.find('span', {'class': 'price buy'})
-    price = price_buy_span.find_all('span')[-1].get_text().strip()
-    price = price[:-4].strip() if price != 'Install' else 'Free'
-    app_details['price'] = price
+    if price_buy_span:
+        price = price_buy_span.find_all('span')[-1].get_text().strip()
+        price = price[:-4].strip() if price != 'Install' else 'Free'
+        app_details['price'] = price
 
     rating_value_meta = soup.find('meta', {'itemprop': 'ratingValue'})
-    app_details['rating'] = rating_value_meta.get('content').strip()
+    if rating_value_meta:
+        app_details['rating'] = rating_value_meta.get('content').strip()
 
     reviewers_count_meta = soup.find('meta', {'itemprop': 'ratingCount'})
-    app_details['reviewers'] = reviewers_count_meta.get('content').strip()
+    if reviewers_count_meta:
+        app_details['reviewers'] = reviewers_count_meta.get('content').strip()
 
     num_downloads_div = soup.find('div', {'itemprop': 'numDownloads'})
-    if num_downloads_div: app_details['downloads'] = num_downloads_div.get_text().strip()
+    if num_downloads_div:
+        app_details['downloads'] = num_downloads_div.get_text().strip()
 
     date_published_div = soup.find('div', {'itemprop': 'datePublished'})
-    app_details['date_published'] = date_published_div.get_text().strip()
+    if date_published_div:
+        app_details['date_published'] = date_published_div.get_text().strip()
 
     operating_systems_div = soup.find('div', {'itemprop': 'operatingSystems'})
-    app_details['operating_system'] = operating_systems_div.get_text().strip()
+    if operating_systems_div:
+        app_details['operating_system'] = operating_systems_div.get_text().strip()
 
     content_rating_div = soup.find('div', {'itemprop': 'contentRating'})
-    app_details['content_rating'] = content_rating_div.get_text().strip()
+    if content_rating_div:
+        app_details['content_rating'] = content_rating_div.get_text().strip()
 
     category_span = soup.find('span', {'itemprop': 'genre'})
-    app_details['category'] = category_span.get_text()
+    if category_span:
+        app_details['category'] = category_span.get_text()
 
     for dev_link in soup.find_all('a', {'class': 'dev-link'}):
         if dev_link.get_text().strip() == "Email Developer":
@@ -139,11 +150,13 @@ def getAppDetails(app_url):
             app_details['dev_website'] = dev_link.get('href').strip()
 
     badge_span = soup.find('span', {'class': 'badge-title'})
-    if badge_span: app_details['badge'] = badge_span.get_text().strip()
+    if badge_span:
+        app_details['badge'] = badge_span.get_text().strip()
 
     for more_apps in soup.find_all('div', {'data-short-classes': 'card apps square-cover tiny no-rationale'}):
         more_app_url = more_apps.find('a', {'class': 'card-click-target'}).get('href')
-        if more_app_url not in apps_discovered and more_app_url not in apps_pending: apps_pending.append(more_app_url)
+        if more_app_url not in apps_discovered and more_app_url not in apps_pending:
+            apps_pending.append(more_app_url)
 
     return app_details
 
@@ -163,14 +176,28 @@ def getTopAppsData(url, start, num, app_type):
         title = div.find('a', {'class': 'title'})
         try:
             app_details = getAppDetails(title.get('href'))
+            # print(app_details)
             if app_details:
                 apps.append(app_details)
             else:
                 skipped_apps.append(title.get('href'))
         except AttributeError:
             skipped_apps.append(title.get('href'))
+            print('skip' + title.get('href'))
 
     return apps, skipped_apps
+
+
+def write_app_to_file(app):
+    if app['category'].upper() not in fileHandlers:
+        fileHandlers[app['category'].upper()] = codecs.open('_'.join(["apps", app['category'].lower()]), 'ab',
+                                                            character_encoding, buffering=0)
+    fileHandler = fileHandlers[app['category'].upper()]
+    #try:
+    fileHandler.write(json.dumps(app) + "\n")
+       # print('dumping ' + app)
+    #except Exception as e:
+       #print(e)
 
 
 def getApps(url):
@@ -180,16 +207,11 @@ def getApps(url):
     size = 100
     while (True):
         apps, skipped_apps = getTopAppsData(url, start_idx, size, app_type)
-        if apps == previous_apps and skipped_apps == previous_skipped_apps: break
+        if apps == previous_apps and skipped_apps == previous_skipped_apps:
+            print('break')
+            break
         for app in apps:
-            if app['category'].upper() not in fileHandlers:
-                fileHandlers[app['category'].upper()] = codecs.open('_'.join(["apps", app['category'].lower()]), 'ab',
-                                                                    character_encoding, buffering=0)
-            fileHandler = fileHandlers[app['category'].upper()]
-            try:
-                fileHandler.write(json.dumps(app) + "\n")
-            except Exception as e:
-                print(e)
+            write_app_to_file(app)
         previous_apps = apps
         previous_skipped_apps = skipped_apps
         start_idx += size
@@ -201,6 +223,7 @@ categories = ['BOOKS_AND_REFERENCE', 'BUSINESS', 'COMICS', 'COMMUNICATION', 'EDU
               'MUSIC_AND_AUDIO', 'NEWS_AND_MAGAZINES', 'PERSONALIZATION', 'PHOTOGRAPHY', 'PRODUCTIVITY', 'SHOPPING',
               'SOCIAL', 'SPORTS', 'TOOLS', 'TRANSPORTATION', 'TRAVEL_AND_LOCAL', 'WEATHER', 'ARCADE', 'BRAIN', 'CARDS',
               'CASUAL', 'GAME_WALLPAPER', 'RACING', 'SPORTS_GAMES', 'GAME_WIDGETS']
+
 # app_types = ['free', 'paid']
 app_types = ['free']
 
