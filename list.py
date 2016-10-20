@@ -1,10 +1,3 @@
-__author__ = 'hao'
-'''
-Created on Aug 28, 2013
-
-@author: anuvrat
-'''
-
 from bs4 import BeautifulSoup
 import urllib.request
 import urllib.parse
@@ -13,8 +6,10 @@ import json
 import pickle
 from datetime import datetime
 
+__author__ = 'hao'
 
-def loadState():
+
+def load_state():
     try:
         state_file = open("state_dump", "rb")
         apps_discovered = pickle.load(state_file)
@@ -29,7 +24,7 @@ def loadState():
 
 
 character_encoding = 'utf-8'
-apps_discovered, apps_pending = loadState()
+apps_discovered, apps_pending = load_state()
 count_offset = len(apps_discovered)
 
 start_time = datetime.now()
@@ -87,7 +82,7 @@ def reportProgress():
           " apps per minute and time remaining in minutes = ", str(t))
 
 
-def saveState():
+def save_state():
     state_file = open("state_dump", "wb")
     pickle.dump(apps_discovered, state_file)
     pickle.dump(apps_pending, state_file)
@@ -218,7 +213,7 @@ def get_apps(url):
         previous_apps = apps
         previous_skipped_apps = skipped_apps
         start_idx += size
-        saveState()
+        save_state()
 
 
 categories = ['BOOKS_AND_REFERENCE', 'BUSINESS', 'COMICS', 'COMMUNICATION', 'EDUCATION', 'ENTERTAINMENT', 'FINANCE',
@@ -252,7 +247,7 @@ errorUrls = codecs.open('_'.join(["apps", "error"]), 'ab', character_encoding, b
 count = 100
 while apps_pending:
     if count == 0:
-        saveState()
+        save_state()
         count = 100
     count = count - 1
 
