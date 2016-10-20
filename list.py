@@ -35,7 +35,7 @@ count_offset = len(apps_discovered)
 start_time = datetime.now()
 
 
-def getPageAsSoup(url, post_values):
+def get_page_as_soup(url, post_values):
     if post_values:
         data = urllib.parse.urlencode(post_values)
         data = data.encode(character_encoding)
@@ -53,15 +53,27 @@ def getPageAsSoup(url, post_values):
     return soup
 
 
-def openResultFiles(all_categories):
-    fileHandlers = {}
-    for category in all_categories:
-        fileHandler = codecs.open('_'.join(["apps", category.lower()]), 'ab', character_encoding, buffering=0)
-        fileHandlers[category] = fileHandler
-    return fileHandlers
+def open_result_files(all_categories):
+    file_handlers = {}
+    #for category in all_categories:
+     #   file_handler = codecs.open('_'.join(["apps", category.lower()]), 'ab', character_encoding, buffering=0)
+      #  file_handlers[category] = file_handler
+    return file_handlers
 
 
-def closeResultFiles(fileHandlers):
+def write_app_to_file(file_handlers, app):
+    if app['category'].upper() not in file_handlers:
+        file_handlers[app['category'].upper()] = codecs.open('_'.join(["apps", app['category'].lower()]), 'ab',
+                                                             character_encoding, buffering=0)
+    file_handler = file_handlers[app['category'].upper()]
+    #try:
+    file_handler.write(json.dumps(app) + "\n")
+       # print('dumping ' + app)
+    #except Exception as e:
+       #print(e)
+
+
+def close_result_files(fileHandlers):
     for v in fileHandlers.values():
         v.close()
 
@@ -93,7 +105,7 @@ def getAppDetails(app_url):
 
     app_details['app_url'] = g_app_url
 
-    soup = getPageAsSoup(g_app_url, None)
+    soup = get_page_as_soup(g_app_url, None)
     if not soup: return None
 
     apps_discovered.append(app_url)
@@ -161,13 +173,13 @@ def getAppDetails(app_url):
     return app_details
 
 
-def getTopAppsData(url, start, num, app_type):
+def get_top_apps_data(url, start, num, app_type):
     values = {'start': start,
               'num': num,
               'numChildren': '0',
               'ipf': '1',
               'xhr': '1'}
-    soup = getPageAsSoup(url, values)
+    soup = get_page_as_soup(url, values)
     if not soup: return [], []
 
     apps = []
@@ -188,30 +200,21 @@ def getTopAppsData(url, start, num, app_type):
     return apps, skipped_apps
 
 
-def write_app_to_file(app):
-    if app['category'].upper() not in fileHandlers:
-        fileHandlers[app['category'].upper()] = codecs.open('_'.join(["apps", app['category'].lower()]), 'ab',
-                                                            character_encoding, buffering=0)
-    fileHandler = fileHandlers[app['category'].upper()]
-    #try:
-    fileHandler.write(json.dumps(app) + "\n")
-       # print('dumping ' + app)
-    #except Exception as e:
-       #print(e)
 
 
-def getApps(url):
+
+def get_apps(url):
     previous_apps = []
     previous_skipped_apps = []
     start_idx = 0
     size = 100
     while (True):
-        apps, skipped_apps = getTopAppsData(url, start_idx, size, app_type)
+        apps, skipped_apps = get_top_apps_data(url, start_idx, size, app_type)
         if apps == previous_apps and skipped_apps == previous_skipped_apps:
             print('break')
             break
         for app in apps:
-            write_app_to_file(app)
+            write_app_to_file(file_handlers, app)
         previous_apps = apps
         previous_skipped_apps = skipped_apps
         start_idx += size
@@ -227,12 +230,12 @@ categories = ['BOOKS_AND_REFERENCE', 'BUSINESS', 'COMICS', 'COMMUNICATION', 'EDU
 # app_types = ['free', 'paid']
 app_types = ['free']
 
-fileHandlers = openResultFiles(categories)
+file_handlers = open_result_files(categories)
 
 for category, app_type in [(x, y) for x in categories for y in app_types]:
     print("Type = ", app_type, " Cateory = ", category)
     url = 'https://play.google.com/store/apps/category/' + category + '/collection/topselling_' + app_type
-    getApps(url)
+    get_apps(url)
 
 top_urls = [  # 'https://play.google.com/store/apps/collection/topselling_paid_game',
     'https://play.google.com/store/apps/collection/topselling_free',
@@ -243,7 +246,7 @@ top_urls = [  # 'https://play.google.com/store/apps/collection/topselling_paid_g
 # 'https://play.google.com/store/apps/collection/topselling_new_paid']
 for url in top_urls:
     print("Crawl collection - ", url)
-    getApps(url)
+    get_apps(url)
 
 errorUrls = codecs.open('_'.join(["apps", "error"]), 'ab', character_encoding, buffering=0)
 count = 100
@@ -254,21 +257,11 @@ while apps_pending:
     count = count - 1
 
     app = apps_pending.pop()
-    try:
-        app_data = getAppDetails(app)
-    except AttributeError:
-        pass
+    app_data = getAppDetails(app)
     if not app_data:
         continue
-    if app_data['category'].upper() not in fileHandlers:
-        fileHandlers[app_data['category'].upper()] = codecs.open('_'.join(["apps", app_data['category'].lower()]), 'ab',
-                                                                 character_encoding, buffering=0)
-    fileHandler = fileHandlers[app_data['category'].upper()]
-    try:
-        fileHandler.write(json.dumps(app_data) + "\n")
-    except Exception as e:
-        print(e)
+    write_app_to_file(file_handlers, app_data)
 
 errorUrls.close()
 print('Complete')
-closeResultFiles(fileHandlers)
+close_result_files(file_handlers)

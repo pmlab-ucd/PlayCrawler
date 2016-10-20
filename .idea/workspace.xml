@@ -2,44 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43ad7590-5a53-4e97-8fcc-927866aaf2c1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_app_wallpaper" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_arcade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_books_and_reference" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_brain" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_business" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_cards" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_casual" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_comics" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_communication" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_education" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_entertainment" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_error" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_finance" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_game_wallpaper" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_game_widgets" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_health_and_fitness" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_libraries_and_demo" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_lifestyle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_media_and_video" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_medical" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_music_and_audio" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_news_and_magazines" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_personalization" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_photography" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_productivity" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_racing" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_shopping" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_social" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_sports" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_sports_games" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_tools" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_transportation" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_travel_and_local" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps_weather" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/state_dump" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/list.py" afterPath="$PROJECT_DIR$/list.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <ignored path="play_crawl.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,7 +17,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/play_crawl$test.coverage" NAME="test Coverage Results" MODIFIED="1476945337766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/play_crawl$craw.coverage" NAME="craw Coverage Results" MODIFIED="1476611856651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/play_crawl$list.coverage" NAME="list Coverage Results" MODIFIED="1476947532840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/play_crawl$list.coverage" NAME="list Coverage Results" MODIFIED="1476947957308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -68,8 +31,8 @@
       <file leaf-file-name="list.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="208" column="75" selection-start-line="208" selection-start-column="75" selection-end-line="208" selection-end-column="75" />
+            <state relative-caret-position="191">
+              <caret line="60" column="24" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
               <folding>
                 <element signature="e#70#99#0" expanded="true" />
               </folding>
@@ -501,9 +464,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35117057" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35117057" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -514,7 +478,6 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -785,8 +748,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="208" column="75" selection-start-line="208" selection-start-column="75" selection-end-line="208" selection-end-column="75" />
+        <state relative-caret-position="191">
+          <caret line="60" column="24" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
           <folding>
             <element signature="e#70#99#0" expanded="true" />
           </folding>
