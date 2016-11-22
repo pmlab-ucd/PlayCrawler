@@ -8,10 +8,10 @@ def load_state():
         state_file = open("crawler_state", "rb")
         apps_downloaded = pickle.load(state_file)
         state_file.close()
-        print( "Downloaded = ", len(apps_downloaded) )
+        print("Downloaded = ", len(apps_downloaded) )
         return apps_downloaded
     except IOError:
-        print( "A fresh start ..." )
+        print("A fresh start ..." )
         return []
 
 
