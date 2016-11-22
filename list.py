@@ -195,9 +195,6 @@ def get_top_apps_data(url, start, num, app_type):
     return apps, skipped_apps
 
 
-
-
-
 def get_apps(url):
     previous_apps = []
     previous_skipped_apps = []
