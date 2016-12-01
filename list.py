@@ -148,7 +148,8 @@ def getAppDetails(app_url):
 
     category_span = soup.find('span', {'itemprop': 'genre'})
     if category_span:
-        app_details['category'] = category_span.get_text()
+        str_cate = str(category_span.get_text()).replace(' & ', '_')
+        app_details['category'] = str_cate
 
     for dev_link in soup.find_all('a', {'class': 'dev-link'}):
         if dev_link.get_text().strip() == "Email Developer":

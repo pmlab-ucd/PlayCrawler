@@ -33,6 +33,7 @@ def save_state():
     state_file = open("crawler_state", "wb")
     pickle.dump(apps_downloaded, state_file)
     state_file.close()
+    print(str(len(apps_downloaded)) + ' apps downloaded!')
 
 
 def download_apk(app_url, out_base_dir, category):
@@ -41,6 +42,12 @@ def download_apk(app_url, out_base_dir, category):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     pkg_name = str(app_url).split('id=')[1]
+    if os.path.exists(output_dir + pkg_name + '.apk'):
+        apk_counts = apk_counts + 1
+        apps_downloaded.append(app_url)
+        if apk_counts % 10 == 0:
+            save_state()
+        return
     cmd = 'java -jar googleplaycrawler-0.3.jar -f crawler.conf download ' + pkg_name
     if run_cmd(cmd):
         if os.path.exists(pkg_name + '.apk'):
