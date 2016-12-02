@@ -64,7 +64,7 @@ def read_json(json_name):
         app = json.loads(line)
         if app['app_url'] not in apps_downloaded:
             print(app['app_url'], app['category'])
-            download_apk(app['app_url'], 'F:\PlayApps', app['category'])
+            download_apk(app['app_url'], 'c:\PlayApps', app['category'])
 
 
 character_encoding = 'utf-8'
@@ -74,11 +74,11 @@ print(str(apk_counts) + ' apps have already been downloaded!')
 
 games = ['action', 'adventure', 'strategy', 'role playing', 'racing', 'puzzle', 'arcade', 'board', 'casino']
 
-
-for root, dirs, files in os.walk('.', topdown=False):
+app_list_dir = '.'
+for root, dirs, files in os.walk(app_list_dir, topdown=False):
     for name in files:
-       if 'apps_' in name and name.replace('apps_', '') not in games:
-            read_json(name)
+       if str(name).startswith('apps_') and name.replace('apps_', '') not in games:
+            read_json(os.path.join(root, name))
 
 
 

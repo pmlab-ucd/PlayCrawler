@@ -35,7 +35,7 @@ for row in reader:
         market = row[-1]
         if '|' in row[-1]:
             market = str(market).split('|')[0]
-        output_dir = 'output/' + market + '/'
+        output_dir = 'C:/Users/Hao\Documents\output/' + market + '/'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         urllib.request.urlretrieve(url, output_dir + str(row[5]).replace('"', '') + "_" + str(row[6]) + ".apk")
