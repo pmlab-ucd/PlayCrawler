@@ -35,10 +35,14 @@ for row in reader:
         market = row[-1]
         if '|' in row[-1]:
             market = str(market).split('|')[0]
-        output_dir = 'C:/Users/Hao\Documents\output/' + market + '/'
+        output_dir = 'G:\output/' + market + '/'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         urllib.request.urlretrieve(url, output_dir + str(row[5]).replace('"', '') + "_" + str(row[6]) + ".apk")
+        if not os.path.exists(output_dir + str(row[5]).replace('"', '') + "_" + str(row[6]) + ".apk"):
+            print("Cannot download " + output_dir + str(row[5]).replace('"', '') + "_" + str(row[6]) + ".apk")
+        else:
+            print(output_dir + str(row[5]).replace('"', '') + "_" + str(row[6]) + ".apk")
         apps_downloaded.append(row[0])
         apk_counts = apk_counts + 1
         if apk_counts % 10 == 0:

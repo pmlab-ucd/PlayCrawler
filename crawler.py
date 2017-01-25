@@ -61,10 +61,14 @@ def download_apk(app_url, out_base_dir, category):
 def read_json(json_name):
     file_handler = codecs.open(json_name, 'r', character_encoding, buffering=0)
     for line in file_handler.readlines():
-        app = json.loads(line)
-        if app['app_url'] not in apps_downloaded:
-            print(app['app_url'], app['category'])
-            download_apk(app['app_url'], 'c:\PlayApps', app['category'])
+        print(json_name)
+        try:
+            app = json.loads(line)
+            if app['app_url'] not in apps_downloaded:
+                print(app['app_url'], app['category'])
+                download_apk(app['app_url'], 'G:\PlayApps', app['category'])
+        except Exception as e:
+            print(e)
 
 
 character_encoding = 'utf-8'
